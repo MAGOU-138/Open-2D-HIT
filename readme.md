@@ -46,7 +46,7 @@ $$
 
 where $J=\frac{\partial \psi}{\partial x}\frac{\partial \omega}{\partial y}-\frac{\partial \psi}{\partial y}\frac{\partial \omega}{\partial x}$ is the non-linear term.
 
-The time integration scheme is a multi-step scheme [@KARNIADAKIS19914]
+The time integration scheme is a multi-step scheme [1]
 
 $$
 \frac{\partial\psi^{(n+1)}}{\partial t}\Delta t=\frac{11}{6}\psi^{(n+1)}-\left(3\psi^{(n)}-\frac{3}{2}\psi^{(n-1)}+\frac{1}{3}\psi^{(n-2)}\right),
@@ -77,6 +77,12 @@ where
 - MPI
 - HDF5
 - WFFT
+
+
 ## Complilation
 Modify the `makefile` with your own libraries' pathes, and then `make`, just as easy as that.
+
+
+# Reference
+- [1] G. E. Karniadakis, M. Israeli, S. A. Orszag, High-order splitting methods for the incompressible Navier-Stokes equations, Journal of Computational Physics 97 (2) (1991) 414–443. doi:https://doi.org/12410.1016/0021-9991(91)90007-8.
 
