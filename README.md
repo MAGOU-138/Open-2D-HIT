@@ -12,8 +12,8 @@
 # Governing equations
 $$
 \begin{aligned}
-\partial_t\omega+\frac{\partial \psi}{\partial y}\frac{\partial \omega}{\partial x}-\frac{\partial \psi}{\partial x}\frac{\partial \omega}{\partial y}&=\nu\nabla^2\omega-\alpha\omega+f,\\
-\omega&=-\nabla^2\psi.
+\partial_t\omega+\frac{\partial \psi}{\partial y}\frac{\partial \omega}{\partial x}-\frac{\partial \psi}{\partial x}\frac{\partial \omega}{\partial y}=\nu\nabla^2\omega-\alpha\omega+f,\\
+\omega=-\nabla^2\psi.
 \end{aligned}
 $$
 
