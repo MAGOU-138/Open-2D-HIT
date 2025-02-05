@@ -10,12 +10,14 @@
 - Lighweight, low encapsulation level, easy to read and modify
 
 # Governing equations
-\[
+
+$$
 \begin{aligned}
 \partial_t\omega+\frac{\partial \psi}{\partial y}\frac{\partial \omega}{\partial x}-\frac{\partial \psi}{\partial x}\frac{\partial \omega}{\partial y}&=\nu\nabla^2\omega-\alpha\omega+f,\\
 \omega&=-\nabla^2\psi.
 \end{aligned}
-\]
+$$
+
 This equation solves the scalar vorticity $\omega$ and streamfunction $\psi$. The $\alpha$ is a linear frictional damping, and $f$ is the curl of forcing term.
 
 <!-- The dimension of vorticity, streamfunction, and other parameters are listed in table. -->
