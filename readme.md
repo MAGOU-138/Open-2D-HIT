@@ -1,0 +1,91 @@
+# Direct numerical simulation of 2-dimensional homogeneous isotropic turbulence using Fourier spectral methods
+
+## keywords
+- spectral methods, Fourier, DNS, Kraichnan turbulence, homogeneous isotropic turbulence (HIT)
+
+# Governing equations
+$$
+\begin{aligned}
+\partial_t\omega+\frac{\partial \psi}{\partial y}\frac{\partial \omega}{\partial x}-\frac{\partial \psi}{\partial x}\frac{\partial \omega}{\partial y}&=\nu\nabla^2\omega-\alpha\omega+f,\\
+\omega&=-\nabla^2\psi.
+\end{aligned}
+$$
+This equation solves the scalar vorticity $\omega$ and streamfunction $\psi$. The $\alpha$ is a linear frictional damping, and $f$ is the curl of forcing term.
+
+<!-- The dimension of vorticity, streamfunction, and other parameters are listed in table. -->
+
+<!-- |$\omega$|$\psi$|$\nu$|$\alpha$|$f$|
+|:---:|:---:|:---:|:---:|:---:|
+|$[T^{-1}]$|$[L^2T^{-1}]$|$[L^2T^{-1}]$|$[T^{-1}]$|$[T^{-2}]$| -->
+
+<!-- The flow is confined in a cyclic box of side $L \times  L$. We expand the vorticty and streamfunction in Fourier series so that the equation becomes -->
+
+<!-- $$
+\omega(x_i,y_i)=\sum_{m=-N_x/2}^{N_x/2-1}\sum_{n=-N_y/2}^{N_y/2-1}\hat{\omega}_{m,n}\exp\left[\mathrm{i}\left(\frac{2\pi m}{L_x}x_i+\frac{2\pi n}{L_y}y_j\right)\right].
+$$ -->
+
+We note
+$$
+k_x=\frac{2\pi m}{L_x},\,k_y=\frac{2\pi n}{L_y}.
+$$
+The equation then becomes
+$$
+\left[\frac{\partial}{\partial t}+\nu k^2+\alpha\right]\hat{\omega}_{m,n}=\hat{J},
+$$
+where $J=\frac{\partial \psi}{\partial x}\frac{\partial \omega}{\partial y}-\frac{\partial \psi}{\partial y}\frac{\partial \omega}{\partial x}$ is the non-linear term.
+
+The time integration scheme is a multi-step scheme [@KARNIADAKIS1991414]
+$$
+\frac{\partial\psi^{(n+1)}}{\partial t}\Delta t=\frac{11}{6}\psi^{(n+1)}-\left(3\psi^{(n)}-\frac{3}{2}\psi^{(n-1)}+\frac{1}{3}\psi^{(n-2)}\right),
+$$
+and the nonlinear term is approximated by Taylor expansion
+$$
+\hat{J}^{(n+1)}=3\hat{J}^{(n)}-3\hat{J}^{(n-1)}+\hat{J}^{(n-2)}.
+$$
+
+
+The discrete algebra equation is then
+$$
+\left[\gamma_0+\Delta t\left(\nu k^2+\alpha\right)\right]\hat{\omega}^{(n+1)}=\sum_{q=0}^{2}\alpha_q\omega^{(n-q)}+\Delta t\sum_{q=0}^{2}\beta_q\hat{J}^{(n-q)},
+$$
+where
+|$\gamma_0$|$\alpha_0$|$\alpha_1$|$\alpha_2$|$\beta_0$|$\beta_1$|$\beta_2$|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|$11/6$|$3$|$-3/2$|$1/3$|$3$|$-3$|$1$|
+
+# Governing equation
+We solve the advection-diffusion system
+$$\partial_t\omega+J(\boldsymbol{u},\omega)=\nu\nabla^2\omega-\alpha\omega.$$
+We rewrite this equation into format that left of it is linear part and right part is nonlinear part
+$$
+\partial_t\omega-\nu\nabla^2\omega+\alpha\omega=-J(\boldsymbol{u},\omega).
+$$
+We discrete the time rate part using implicit scheme
+$$
+\Delta t\,\partial_t\omega^{(n+1)}=\frac{11}{6}\omega^{(n+1)}-\left(3\omega^{(n)}-\frac{3}{2}\omega^{(n-1)}+\frac{1}{3}\omega^{(n-2)}\right).
+$$
+We discrete the nonlinear part using explict scheme
+$$
+J^{(n+1)}=3J^{(n)}-3J^{(n-1)}+J^{(n-2)}.
+$$
+We discrete the diffusion and friction part using implicit scheme, thus we discrete the system by
+$$
+\frac{1}{\Delta t}\left[\frac{11}{6}\omega^{(n+1)}-\left(3\omega^{(n)}-\frac{3}{2}\omega^{(n-1)}+\frac{1}{3}\omega^{(n-2)}\right)\right]-\nu\nabla^2\omega^{(n+1)}+\alpha\omega^{(n+1)}=-\left(3J^{(n)}-3J^{(n-1)}+J^{(n-2)}\right),
+$$
+and it's arranged into
+$$
+\left(\frac{1}{\Delta t}\frac{11}{6}-\nu\nabla^2+\alpha\right)\omega^{(n+1)}=\frac{1}{\Delta t}\left(3\omega^{(n)}-\frac{3}{2}\omega^{(n-1)}+\frac{1}{3}\omega^{(n-2)}\right)-\left(3J^{(n)}-3J^{(n-1)}+J^{(n-2)}\right),
+$$
+or
+$$
+\left[\frac{11}{6}+\Delta t\left(\alpha-\nu\nabla^2\right)\right]\omega^{(n+1)}=\left(3\omega^{(n)}-\frac{3}{2}\omega^{(n-1)}+\frac{1}{3}\omega^{(n-2)}\right)-\Delta t\left(3J^{(n)}-3J^{(n-1)}+J^{(n-2)}\right).
+$$
+
+# Numerical set-up
+|     |     |     |
+|:---:|:---:|:---:|
+|yn+2 |		|	y |
+|yn+1 | y	|	y0|
+|yn	  | y0	|	y1|
+|yn-1 |	y1	|	y2|
+|yn-2 |	y2  |     |
