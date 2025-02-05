@@ -17,6 +17,7 @@ $$
 \omega=-\nabla^2\psi.
 \end{aligned}
 $$
+
 This equation solves the scalar vorticity $\omega$ and streamfunction $\psi$. The $\alpha$ is a linear frictional damping, and $f$ is the curl of forcing term.
 
 <!-- The dimension of vorticity, streamfunction, and other parameters are listed in table. -->
@@ -36,11 +37,13 @@ $$
 $$
 k_x=\frac{2\pi m}{L_x},\,k_y=\frac{2\pi n}{L_y}.
 $$ -->
+
 In Fourier wavenumber space, the equation becomes
 
 $$
 \left[\frac{\partial}{\partial t}+\nu k^2+\alpha\right]\hat{\omega}_{m,n}=\hat{J},
 $$
+
 where $J=\frac{\partial \psi}{\partial x}\frac{\partial \omega}{\partial y}-\frac{\partial \psi}{\partial y}\frac{\partial \omega}{\partial x}$ is the non-linear term.
 
 The time integration scheme is a multi-step scheme [@KARNIADAKIS19914]
@@ -54,6 +57,7 @@ and the nonlinear term is approximated by Taylor expansion
 $$
 \hat{J}^{(n+1)}=3\hat{J}^{(n)}-3\hat{J}^{(n-1)}+\hat{J}^{(n-2)},
 $$
+
 and the viscous terms are treated implicitly.
 
 
@@ -62,6 +66,7 @@ The discrete algebra equation is then
 $$
 \left[\gamma_0+\Delta t\left(\nu k^2+\alpha\right)\right]\hat{\omega}^{(n+1)}=\sum_{q=0}^{2}\alpha_q\omega^{(n-q)}+\Delta t\sum_{q=0}^{2}\beta_q\hat{J}^{(n-q)},
 $$
+
 where
 |$\gamma_0$|$\alpha_0$|$\alpha_1$|$\alpha_2$|$\beta_0$|$\beta_1$|$\beta_2$|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
