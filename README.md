@@ -27,9 +27,9 @@ This equation solves the scalar vorticity $\omega$ and streamfunction $\psi$. Th
 
 <!-- The flow is confined in a cyclic box of side $L \times  L$. We expand the vorticty and streamfunction in Fourier series so that the equation becomes -->
 
-<!-- $$
+$$
 \omega(x_i,y_i)=\sum_{m=-N_x/2}^{N_x/2-1}\sum_{n=-N_y/2}^{N_y/2-1}\hat{\omega}_{m,n}\exp\left[\mathrm{i}\left(\frac{2\pi m}{L_x}x_i+\frac{2\pi n}{L_y}y_j\right)\right].
-$$ -->
+$$
 
 <!-- We note
 $$
