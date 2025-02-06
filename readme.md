@@ -1,4 +1,5 @@
 # Direct numerical simulation of 2-dimensional homogeneous isotropic turbulence using Fourier spectral methods
+![][shot-198.png][]
 
 ## keywords
 - spectral methods, Fourier, DNS, Kraichnan turbulence, homogeneous isotropic turbulence (HIT)
